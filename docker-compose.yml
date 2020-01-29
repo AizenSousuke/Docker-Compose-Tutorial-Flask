@@ -1,0 +1,20 @@
+version: "3"
+services:
+    # Web and Redis services are in different images
+    web:
+        build:
+            # This folder
+            context: .
+            # Name of the dockerfile
+            dockerfile: Dockerfile
+        volumes:
+            # Mount current directory to /code inside the container
+            - .:/code
+        environment:
+            FLASK_ENV: development
+        # port to expose
+        ports:
+            - "5000:5000"
+    # Database to store the 'seen' count
+    redis:
+        image: "redis:alpine"
